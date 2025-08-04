@@ -1,0 +1,34 @@
+def main() -> None:
+    # Lê a quantidade de matrizes
+    n = int(input().strip())
+
+    best_accuracy = -1.0
+    best_index = -1
+
+    # Percorre cada matriz
+    for idx in range(n):
+        # Lê a linha de entrada e padroniza os separadores (vírgula e ponto para espaço)
+        line = input().strip().replace(',', ' ').replace('.', ' ')
+        tp, fp, fn, tn = map(int, line.split())
+
+        # Calcule a acurácia
+        denominator = tp + fp + fn + tn
+        if denominator == 0:
+            accuracy = 0.0
+        else:
+            accuracy = (tp + tn) / denominator
+
+        # Atualiza a melhor acurácia, se necessário
+        if accuracy > best_accuracy:
+            best_accuracy = accuracy
+            best_index = idx
+
+    # Formata a acurácia para remover zeros finais e ponto desnecessário
+    accuracy_str = f"{best_accuracy:.2f}".rstrip('0').rstrip('.')
+
+    # Imprime o resultado
+    print(f"Index: {best_index}")
+    print(f"Accuracy: {accuracy_str}")
+
+if __name__ == "__main__":
+    main()
